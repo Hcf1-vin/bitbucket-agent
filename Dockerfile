@@ -55,7 +55,7 @@ RUN curl -sSLo /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/ch
 
 # install kubectl
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux
-RUN curl -sSLo /tmp/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL}/bin/linux/amd64/kubectl" \
+RUN curl -sSLo /tmp/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
   && chmod +x ./tmp/kubectl \
   && mv /tmp/kubectl /usr/bin/kubectl \
   && kubectl version --client
