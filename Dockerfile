@@ -3,6 +3,7 @@ FROM alpine:latest
 ENV GCLOUDSDK_VERSION="282.0.0"
 ENV TERRAFORM_VERSION="0.12.21"
 ENV PACKER_VERSION="0.9.0"
+ENV KUBECTL_VERSION="v1.17.3"
 
 # install a few nessersary packages 
 RUN apk update \
@@ -51,3 +52,10 @@ RUN curl -sSLo /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/ch
   && tar -C /usr/bin -zxvf /tmp/google-cloud-sdk.tar.gz google-cloud-sdk \
   && rm -f /tmp/google-cloud-sdk.tar.gz \
   && gcloud --version
+
+# install kubectl
+# https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux
+RUN curl -sSLo /tmp/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL}/bin/linux/amd64/kubectl" \
+  && chmod +x ./tmp/kubectl \
+  && mv /tmp/kubectl /usr/bin/kubectl \
+  && kubectl version --client
